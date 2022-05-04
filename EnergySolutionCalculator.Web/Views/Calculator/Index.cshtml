@@ -5,7 +5,7 @@
     ViewData["Title"] = "Kalkulátor";
 }
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-2">
         <form asp-controller="Calculator" asp-action="Index" method="post">
             <div asp-validation-summary = "All" class="text-danger"></div>
             <div class="form-group">
@@ -18,9 +18,7 @@
     </div>
 </div>
 @{ApplicationUser user = UserManager.FindByNameAsync(User.Identity.Name).Result;}
-@{
-    decimal installDays = Math.Ceiling(Model.NumberOfPanels < 20 ? (decimal)1 : (decimal)((double)Model.NumberOfPanels / 20));
-}
+
 <hr />
 
 <table class="table">
@@ -66,9 +64,6 @@
             Amperigény
         </th>
         <th>
-            EUR
-        </th>
-        <th>
             HUF
         </th>
         <th>
@@ -84,7 +79,7 @@
         <tr>
             <td>
                 
-                @if(item is not null && user.SelectedInverters is not null && user.SelectedInverters.Contains(item))
+                @if(item is not null && user.SelectedInverters is not null && user.SelectedInverters.Any(i=>i.Id == item.Id))
                 {
                         <p>Rögzítve</p>
                     }
@@ -105,25 +100,25 @@
                 @Html.DisplayFor(modelItem => item.MaxNumberOfPanels)
             </td>
             <td>
-                @Model.NumberOfPanels
+                @Html.DisplayFor(modelItem => item.NumberOfPanels)
             </td>
             <td>
-                @((decimal)((double)Model.NumberOfPanels * 0.375))
+                @Html.DisplayFor(modelItem => item.Output)
             </td>
             <td>
-                @((decimal)((double)Model.NumberOfPanels * 1.8))
+                @Html.DisplayFor(modelItem => item.PanelSize)
             </td>
             <td>
-                @String.Format("{0:C0}",Model.ConstantPrices.ElementAt(0).Price/(decimal)1.27)
+                @Html.DisplayFor(modelItem=>item.MaterialCost) 
             </td>
             <td>
-                @String.Format("{0:C0}",(Model.ConstantPrices.ElementAt(1).Price/(decimal)1.27 + (decimal)(Model.NumberOfPanels > 20 ? 1 : 2))*installDays*(decimal)2)
+                @Html.DisplayFor(modelItem => item.WorkCost)
             </td>
             <td>
-                @String.Format("{0:C0}",Model.ConstantPrices.ElementAt(2).Price/(decimal)1.27*installDays)
+                @Html.DisplayFor(modelItem => item.ShippingCost)
             </td>
             <td>
-                @String.Format("{0:C0}",Model.ConstantPrices.ElementAt(3).Price)
+                @Html.DisplayFor(modelItem => item.PlanningCost)
             </td>
             <td>
                 @Html.DisplayFor(modelItem=>item.Size)
@@ -132,16 +127,13 @@
                 @Html.DisplayFor(modelItem => item.Amps)
             </td>
             <td>
-                @Html.DisplayFor(modelItem=>item.PriceEur)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem=>item.PriceHuf)
             </td>
             <td>
-                @String.Format("{0:C0}",Model.ConstantPrices.ElementAt(4).Price)
+                @Html.DisplayFor(modelItem => item.PanelCost)
             </td>
             <td>
-
+                @Html.DisplayFor(modelItem => item.FullCost)
             </td>
         </tr>
     }

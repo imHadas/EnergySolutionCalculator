@@ -9,6 +9,8 @@ namespace EnergySolutionCalculator.Web.Models
     {
         [Key]
         public int Id { get; set; }
+        [DisplayName("Panelszám")]
+        public int NumberOfPanels { get; set; }
         [Required]
         [DisplayName("Inverter")]
         public string Name { get; set; } = null!;
@@ -22,10 +24,7 @@ namespace EnergySolutionCalculator.Web.Models
         public int MinNumberOfPanels { get; set; }
         [DisplayName("Max panelszám")]
         public int MaxNumberOfPanels { get; set; }
-        [DisplayName("EUR")]
-        [Precision(18, 2)]
-        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
-        public decimal PriceEur { get; set; }
+        
         [DisplayName("HUF")]
         [Precision(18, 2)]
         [DisplayFormat(DataFormatString = "{0:C0}")]
@@ -37,22 +36,28 @@ namespace EnergySolutionCalculator.Web.Models
         [Precision(18, 2)]
         public decimal PanelSize { get; set; }
         [DisplayName("Szerelési anyagköltség netto/panel")]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         [Precision(18, 2)]
         public decimal MaterialCost { get; set; }
         [DisplayName("Munkadíj netto")]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         [Precision(18, 2)]
         public decimal WorkCost { get; set; }
         [DisplayName("Kiszállítás netto")]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         [Precision(18, 2)]
         public decimal ShippingCost { get; set; }
         [DisplayName("Tervezési költség")]
         [Precision(18, 2)]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         public decimal PlanningCost { get; set; }
+        [DisplayName("Panel netto")]
+        [Precision(18, 2)]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
+        public decimal PanelCost { get; set; }
         [DisplayName("Rendszerár brutto")]
         [Precision(18, 2)]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         public decimal FullCost { get; set; }
-        [ForeignKey("ApplicationUser")]
-        public int? UserId { get; set; }
-        public virtual ApplicationUser? User { get; set; }
     }
 }

@@ -15,28 +15,43 @@ namespace EnergySolutionCalculator.Web.Models
             {
                 new ConstantPrice
                 {
-                    Name = "Szerelési anyagköltsség nettó/panel",
-                    Price = 25500
+                    Name = "Szerelési anyagköltsség/panel",
+                    Price = 23000
                 },
                 new ConstantPrice
                 {
-                    Name = "Munkadíj nettó",
-                    Price = 100000
+                    Name = "Munkadíj 20>=",
+                    Price = 400000
                 },
                 new ConstantPrice
                 {
-                    Name = "Kiszállítás nettó",
-                    Price = 25000
+                    Name = "Munkadíj/panel 20<x<=30",
+                    Price = 15000
+                },
+                new ConstantPrice
+                {
+                    Name = "Munkadíj 30<x<=50",
+                    Price = 580000
+                },
+                new ConstantPrice
+                {
+                    Name = "Munkadíj/panel 50<x<=75",
+                    Price = 16000
+                },
+                new ConstantPrice
+                {
+                    Name = "Kiszállítás",
+                    Price = 20000
                 },
                 new ConstantPrice
                 {
                     Name = "Tervezési költség",
-                    Price = 60000
+                    Price = 40000
                 },
                 new ConstantPrice
                 {
-                    Name = "Panel netto",
-                    Price = 44000
+                    Name = "Panel",
+                    Price = 63000
                 }
             };
 

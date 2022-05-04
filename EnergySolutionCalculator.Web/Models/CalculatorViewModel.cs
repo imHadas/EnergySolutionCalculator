@@ -8,7 +8,6 @@ namespace EnergySolutionCalculator.Web.Models
         [DisplayName("Panelek száma")]
         [Range(0,int.MaxValue,ErrorMessage ="Csak pozitív számok vihetők be!")]
         public int NumberOfPanels { get; set; }
-        public IEnumerable<Inverter>? Inverters { get; set; }
-        public IEnumerable<ConstantPrice>? ConstantPrices { get; set; }
+        public IEnumerable<InverterCalculatorViewModel>? Inverters { get; set; }
     }
 }

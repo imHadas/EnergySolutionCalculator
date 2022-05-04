@@ -30,9 +30,6 @@
             @Html.DisplayNameFor(model => model.Amps)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PriceEur)
-        </th>
-        <th>
             @Html.DisplayNameFor(model=> model.PriceHuf)
         </th>
         @if(User.IsInRole("Administrator"))
@@ -59,9 +56,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Amps)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem=>item.PriceEur)
             </td>
             <td>
                 @Html.DisplayFor(modelItem=>item.PriceHuf)

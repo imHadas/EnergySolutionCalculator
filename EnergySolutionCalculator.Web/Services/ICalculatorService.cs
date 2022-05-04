@@ -6,6 +6,7 @@ namespace EnergySolutionCalculator.Web.Services
     {
         List<Inverter> GetInverters();
         List<Inverter> GetInvertersBetween(int nop);
+        List<Inverter> GetInvertersByUserId(int id);
         List<ConstantPrice> GetConstantPrices();
         Inverter? GetInverterByName(string name);
         Inverter? GetInverter(int id);

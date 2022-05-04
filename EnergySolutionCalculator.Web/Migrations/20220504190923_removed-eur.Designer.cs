@@ -4,6 +4,7 @@ using EnergySolutionCalculator.Web.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnergySolutionCalculator.Web.Migrations
 {
     [DbContext(typeof(CalculatorDbContext))]
-    partial class CalculatorDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220504190923_removed-eur")]
+    partial class removedeur
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

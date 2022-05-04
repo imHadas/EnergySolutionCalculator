@@ -34,15 +34,16 @@ namespace EnergySolutionCalculator.Web.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByNameAsync(vm.UserName);
-                if (user.SelectedInverters is null)
-                    user.SelectedInverters = new List<Inverter>();
-                user.SelectedInverters?.Clear();
-                var succeed = _service.UpdateUser(user);
 
                 var result = await _signInManager.PasswordSignInAsync(user, vm.Password, false, false);
 
                 if (result.Succeeded)
                 {
+                    foreach (var inverter in _service.GetInvertersByUserId(user.Id))
+                    {
+                        inverter.User = null;
+                        _service.UpdateInverter(inverter);
+                    }
                     return RedirectToAction("Index","Home");
                 }
 
@@ -53,7 +54,7 @@ namespace EnergySolutionCalculator.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         public IActionResult Register(string? returnUrl = null)
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -62,7 +63,7 @@ namespace EnergySolutionCalculator.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles ="Administrator")]
+        //[Authorize(Roles ="Administrator")]
         public async Task<IActionResult> Register(RegisterViewModel vm, string? returnUrl = null)
         {
             ViewBag.ReturnUrl = returnUrl;

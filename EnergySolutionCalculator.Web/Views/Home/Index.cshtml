@@ -12,7 +12,14 @@
     @if(SignInManager.IsSignedIn(User))
     {
         <h1 class="display-4">Üdvözöljük @UserManager.GetUserName(User)</h1>
-        <h2><a class="nav-link text-dark" asp-area="" asp-controller="Inverter" asp-action="Index">Inverterek</a> <a class="nav-link text-dark" asp-area="" asp-controller="ConstantPrice" asp-action="Index">Konstansok</a></h2>
+        <h2>
+            @if(User.IsInRole("Administrator"))
+            {
+                <a class="nav-link text-dark" asp-area="" asp-controller="Inverter" asp-action="Index">Inverterek</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="ConstantPrice" asp-action="Index">Konstansok</a>
+            }
+            <a class="nav-link text-dark" asp-area="" asp-controller="Calculator" asp-action="Index">Kalkulátor</a>
+        </h2>
     }
     else
     {

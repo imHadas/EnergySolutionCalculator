@@ -57,8 +57,7 @@ namespace EnergySolutionCalculator.Web.Controllers
                     using (OleDbDataAdapter odaExcel = new OleDbDataAdapter())
                     {
                         cmdExcel.Connection = connExcel;
-
-                        //Get the name of First Sheet.
+                        
                         connExcel.Open();
                         DataTable dtExcelSchema;
                         dtExcelSchema = connExcel.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
@@ -84,7 +83,6 @@ namespace EnergySolutionCalculator.Web.Controllers
                     Amps = dr["Amps"].ToString(),
                     MinNumberOfPanels = Int32.Parse(dr["MinNumberOfPanels"].ToString()),
                     MaxNumberOfPanels = Int32.Parse(dr["MaxNumberOfPanels"].ToString()),
-                    PriceEur = Decimal.Parse(dr["PriceEur"].ToString()),
                     PriceHuf = Decimal.Parse(dr["PriceHuf"].ToString())
                 };
                 var inv = _service.GetInverterByName(inverter.Name);
@@ -94,7 +92,6 @@ namespace EnergySolutionCalculator.Web.Controllers
                     inv.Amps = inverter.Amps;
                     inv.MinNumberOfPanels = inverter.MinNumberOfPanels;
                     inv.MaxNumberOfPanels = inverter.MaxNumberOfPanels;
-                    inv.PriceEur = inverter.PriceEur;
                     inv.PriceHuf = inverter.PriceHuf;
                     var result = _service.UpdateInverter(inv);
                     if (!result)

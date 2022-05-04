@@ -19,6 +19,11 @@ namespace EnergySolutionCalculator.Web.Services
         {
             return _context.Inverters.Where(i => i.MinNumberOfPanels <= nop && i.MaxNumberOfPanels >= nop).ToList();
         }
+
+        public List<Inverter> GetInvertersByUserId(int id)
+        {
+            return _context.Inverters.Where(i => i.UserId == id).ToList();
+        }
         public Inverter? GetInverterByName(string name)
         {
             return _context.Inverters.FirstOrDefault(i => i.Name == name);
@@ -33,7 +38,7 @@ namespace EnergySolutionCalculator.Web.Services
         }
         public ConstantPrice? GetConstantPrice(int id)
         {
-            return _context.ConstantPrices.FirstOrDefault(c => c.Id == id);
+            return _context.ConstantPrices.FirstOrDefault(c=>c.Id == id);
         }
         public bool UpdateUser(ApplicationUser user)
         {

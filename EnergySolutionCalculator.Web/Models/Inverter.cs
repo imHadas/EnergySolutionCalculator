@@ -22,10 +22,6 @@ namespace EnergySolutionCalculator.Web.Models
         public int MinNumberOfPanels { get; set; }
         [DisplayName("Max panelszám")]
         public int MaxNumberOfPanels { get; set; }
-        [DisplayName("EUR")]
-        [Precision(18, 2)]
-        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
-        public decimal PriceEur { get; set; }
         [DisplayName("HUF")]
         [Precision(18, 2)]
         [DisplayFormat(DataFormatString = "{0:C0}")]

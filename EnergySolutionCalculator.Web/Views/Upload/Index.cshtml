@@ -1,0 +1,23 @@
+﻿@model ReadExcelViewModel
+
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <form asp-controller="Upload" asp-action="Index" method="post" enctype="multipart/form-data">
+        
+			<div class="form-group">
+				<label asp-for="File"></label>
+				<input asp-for="File" class="form-control" />
+				<span asp-validation-for="File" class="text-danger"></span>
+			</div>
+			<button class="btn btn-default" type="submit">Felvétel</button>
+    </form>
+</div>
+
+
+@section Scripts {
+	@await Html.PartialAsync("_ValidationScriptsPartial")
+}

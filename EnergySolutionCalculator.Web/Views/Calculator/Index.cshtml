@@ -1,0 +1,149 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model CalculatorViewModel
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Kalkulátor";
+}
+<div class="row">
+    <div class="col-md-5">
+        <form asp-controller="Calculator" asp-action="Index" method="post">
+            <div asp-validation-summary = "All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NumberOfPanels"></label>
+                <input asp-for="NumberOfPanels" />
+                <span asp-validation-for="NumberOfPanels" class="text-danger"></span>
+            </div>
+            <button class"btn btn-default" type="submit">Rögzít</button>
+        </form>
+    </div>
+</div>
+@{ApplicationUser user = UserManager.FindByNameAsync(User.Identity.Name).Result;}
+@{
+    decimal installDays = Math.Ceiling(Model.NumberOfPanels < 20 ? (decimal)1 : (decimal)((double)Model.NumberOfPanels / 20));
+}
+<hr />
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+
+        </th>
+        <th>
+            Név
+        </th>
+        <th>
+            Minimum panelszám
+        </th>
+        <th>
+            Maximum panelszám
+        </th>
+        <th>
+            Panelszám
+        </th>
+        <th>
+            Teljesítmény
+        </th>
+        <th>
+            Méret (nm)
+        </th>
+        <th>
+            Szerelési anyagköltség netto/panel
+        </th>
+        <th>
+            Munkadíj netto
+        </th>
+        <th>
+            Kiszállítás netto
+        </th>
+        <th>
+            Tervezési költség
+        </th>
+        <th>
+            Inverter Mérete
+        </th>
+        <th>
+            Amperigény
+        </th>
+        <th>
+            EUR
+        </th>
+        <th>
+            HUF
+        </th>
+        <th>
+            Panel netto
+        </th>
+        <th>
+            Rendszerár brutto
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Inverters) {
+        <tr>
+            <td>
+                
+                @if(item is not null && user.SelectedInverters is not null && user.SelectedInverters.Contains(item))
+                {
+                        <p>Rögzítve</p>
+                    }
+                    else
+                    {
+                        <form>
+                            <button asp-action="Fixate" asp-controller="Calculator" asp-route-id="@item.Id" asp-route-nop="@Model.NumberOfPanels" class="btn btn-default">Rögzítés</button>
+                        </form>
+                    }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem=>item.MinNumberOfPanels)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxNumberOfPanels)
+            </td>
+            <td>
+                @Model.NumberOfPanels
+            </td>
+            <td>
+                @((decimal)((double)Model.NumberOfPanels * 0.375))
+            </td>
+            <td>
+                @((decimal)((double)Model.NumberOfPanels * 1.8))
+            </td>
+            <td>
+                @String.Format("{0:C0}",Model.ConstantPrices.ElementAt(0).Price/(decimal)1.27)
+            </td>
+            <td>
+                @String.Format("{0:C0}",(Model.ConstantPrices.ElementAt(1).Price/(decimal)1.27 + (decimal)(Model.NumberOfPanels > 20 ? 1 : 2))*installDays*(decimal)2)
+            </td>
+            <td>
+                @String.Format("{0:C0}",Model.ConstantPrices.ElementAt(2).Price/(decimal)1.27*installDays)
+            </td>
+            <td>
+                @String.Format("{0:C0}",Model.ConstantPrices.ElementAt(3).Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem=>item.Size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amps)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem=>item.PriceEur)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem=>item.PriceHuf)
+            </td>
+            <td>
+                @String.Format("{0:C0}",Model.ConstantPrices.ElementAt(4).Price)
+            </td>
+            <td>
+
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

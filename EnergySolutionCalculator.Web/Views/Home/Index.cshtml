@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+<div class="text-center">
+    @if(SignInManager.IsSignedIn(User))
+    {
+        <h1 class="display-4">Üdvözöljük @UserManager.GetUserName(User)</h1>
+        <h2><a class="nav-link text-dark" asp-area="" asp-controller="Inverter" asp-action="Index">Inverterek</a> <a class="nav-link text-dark" asp-area="" asp-controller="ConstantPrice" asp-action="Index">Konstansok</a></h2>
+    }
+    else
+    {
+        <h1>Energy Solution Calculator</h1>
+        <h2><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Bejelentkezés</a></h2>
+    }
+</div>

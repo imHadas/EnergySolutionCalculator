@@ -1,0 +1,63 @@
+﻿@model Inverter
+
+@{
+    ViewData["Title"] = "Inverter eltávolítása";
+}
+
+<h2>Inverter kitörlése</h2>
+
+<h3>Biztosan ki szeretnéd törölni?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Amps)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Amps)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MinNumberOfPanels)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MinNumberOfPanels)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MaxNumberOfPanels)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaxNumberOfPanels)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PriceEur)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PriceEur)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PriceHuf)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PriceHuf)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Törlés" class="btn btn-danger" /> |
+        <a asp-action="Index" asp-controller="Inverter">Vissza az inverterekhez</a>
+    </form>
+</div>
+

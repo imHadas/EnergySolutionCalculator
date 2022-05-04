@@ -1,0 +1,39 @@
+﻿@model EnergySolutionCalculator.Web.Models.InverterViewModel
+@{
+    ViewData["Title"] = "Új Inverter";
+}
+
+<h1>Új Inverter Felvétele</h1>
+
+<div class="row">
+	<div class="col-md-5">
+		<form asp-controller="Inverter" asp-action="Create" asp-route-returnUrl="@ViewBag.ReturnUrl" method="post">
+			<div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+			<div class="form-group">
+				<label asp-for="Size"></label>
+				<input asp-for="Size" class="form-control" />
+				<span asp-validation-for="Size" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Amps"></label>
+				<input asp-for="Amps" class="form-control" />
+				<span asp-validation-for="Amps" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="PriceEur"></label>
+				<input asp-for="PriceEur" class="form-control" />
+				<span asp-validation-for="PriceEur" class="text-danger"></span>
+			</div>
+			<button class="btn btn-default" type="submit">Felvétel</button>
+		</form>
+	</div>
+</div>
+
+@section Scripts {
+	@await Html.PartialAsync("_ValidationScriptsPartial")
+}

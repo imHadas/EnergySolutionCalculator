@@ -69,14 +69,14 @@ namespace EnergySolutionCalculator.Web.Controllers
                     PriceHuf = inv.PriceHuf,
                     Output = (decimal)(nop * 0.375),
                     PanelSize = (decimal)(nop * 1.8),
-                    MaterialCost = _service.GetConstantPrice(6).Price,
-                    WorkCost = nop <= 20 ? _service.GetConstantPrice(7).Price : 
-                        nop <= 30 ? _service.GetConstantPrice(7).Price + _service.GetConstantPrice(8).Price * (nop - 20) : 
-                        nop <= 50 ? _service.GetConstantPrice(9).Price :
-                        nop <= 75 ? _service.GetConstantPrice(9).Price + _service.GetConstantPrice(10).Price * (nop - 50) : 0 ,
-                    ShippingCost = _service.GetConstantPrice(11).Price * installDays,
-                    PlanningCost = _service.GetConstantPrice(12).Price,
-                    PanelCost = _service.GetConstantPrice(13).Price
+                    MaterialCost = _service.GetConstantPrice(1).Price,
+                    WorkCost = nop <= 20 ? _service.GetConstantPrice(2).Price : 
+                        nop <= 30 ? _service.GetConstantPrice(2).Price + _service.GetConstantPrice(3).Price * (nop - 20) : 
+                        nop <= 50 ? _service.GetConstantPrice(4).Price :
+                        nop <= 75 ? _service.GetConstantPrice(4).Price + _service.GetConstantPrice(5).Price * (nop - 50) : 0 ,
+                    ShippingCost = _service.GetConstantPrice(6).Price * installDays,
+                    PlanningCost = _service.GetConstantPrice(7).Price,
+                    PanelCost = _service.GetConstantPrice(8).Price
                 };
                 icvm.FullCost = ((nop * icvm.MaterialCost + icvm.PriceHuf) * (decimal)1.15 +
                                  icvm.WorkCost + icvm.ShippingCost * installDays + icvm.PlanningCost) + 120000 + 266000 + (icvm.PanelCost * nop)*(decimal)1.1; //120k a tűzeseti esetleges konstans/választható opció / Mi a tököm az a 266k??
@@ -84,6 +84,13 @@ namespace EnergySolutionCalculator.Web.Controllers
             }
 
             return list;
+        }
+        public IActionResult Calculate(PartialCalculatorViewModel vm)
+        {
+            vm.RecommendedPanels = (int)Math.Ceiling(vm.ElectricityBill * (decimal)12 / (decimal)37.5 / (decimal)1150 / (decimal)0.4);
+            vm.Output = (decimal)vm.RecommendedPanels * (decimal)400 * (decimal)1.2;
+            vm.Size = (decimal)vm.RecommendedPanels * (decimal)1.87;
+            return PartialView("_CalculatorPartial", vm);
         }
     }
 }

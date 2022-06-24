@@ -36,9 +36,9 @@ namespace EnergySolutionCalculator.Web.Services
         {
             return _context.ConstantPrices.ToList();
         }
-        public ConstantPrice? GetConstantPrice(int id)
+        public ConstantPrice GetConstantPrice(int id)
         {
-            return _context.ConstantPrices.FirstOrDefault(c=>c.Id == id);
+            return _context.ConstantPrices.Single(c=>c.CpId == id);
         }
         public bool UpdateUser(ApplicationUser user)
         {

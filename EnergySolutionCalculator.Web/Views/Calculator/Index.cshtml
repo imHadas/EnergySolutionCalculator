@@ -4,6 +4,9 @@
 @{
     ViewData["Title"] = "Kalkulátor";
 }
+
+@await Html.PartialAsync("_CalculatorPartial", new PartialCalculatorViewModel())
+
 <div class="row">
     <div class="col-md-2">
         <form asp-controller="Calculator" asp-action="Index" method="post">

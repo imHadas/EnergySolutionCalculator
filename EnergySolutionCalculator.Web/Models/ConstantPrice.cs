@@ -8,6 +8,7 @@ namespace EnergySolutionCalculator.Web.Models
     {
         [Key]
         public int Id { get; set; }
+        public int CpId { get; set; }
         [Required]
         [DisplayName("Név")]
         public string Name { get; set; } = null!;
